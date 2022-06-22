@@ -1,0 +1,11 @@
+*.pyc
+checkpoints/
+data/
+dataset/timit_8k_mel/train_B
+dataset/timit_8k_mel/test_B
+dataset/timit_16k_mel/train_B
+dataset/timit_16k_mel/test_B
+.git
+__pycache__
+dataset/
+*.zip
