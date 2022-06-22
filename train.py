@@ -60,7 +60,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
 
         # sum per device losses
         losses = [ torch.mean(x) if not isinstance(x, int) else x for x in losses ]
-        loss_dict = dict(zip(model.module.loss_names, losses))
+        loss_dict = dict(zip(model.loss_names, losses))
 
         # calculate final loss scalar
         loss_D = (loss_dict['D_fake'] + loss_dict['D_real']) * 0.5
@@ -72,14 +72,14 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
         writter.add_scalar('train/MSE', MSE_Loss.item(), global_step=total_steps)
         ############### Backward Pass ####################
         # update generator weights
-        model.module.optimizer_G.zero_grad()
+        model.optimizer_G.zero_grad()
         loss_G.backward()
-        model.module.optimizer_G.step()
+        model.optimizer_G.step()
 
         # update discriminator weights
-        model.module.optimizer_D.zero_grad()
+        model.optimizer_D.zero_grad()
         loss_D.backward()
-        model.module.optimizer_D.step()
+        model.optimizer_D.step()
 
         #call(["nvidia-smi", "--format=csv", "--query-gpu=memory.used,memory.free"]) 
 
@@ -101,7 +101,7 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
         ### save latest model
         if total_steps % opt.save_latest_freq == 0:
             print('saving the latest model (epoch %d, total_steps %d)' % (epoch, total_steps))
-            model.module.save('latest')            
+            model.save('latest')            
             np.savetxt(iter_path, (epoch, epoch_iter), delimiter=',', fmt='%d')
        
     # end of epoch 
@@ -112,11 +112,11 @@ for epoch in range(start_epoch, opt.niter + opt.niter_decay + 1):
     ### save model for this epoch
     if epoch % opt.save_epoch_freq == 0:
         print('saving the model at the end of epoch %d, iters %d' % (epoch, total_steps))        
-        model.module.save('latest')
-        model.module.save(epoch)
+        model.save('latest')
+        model.save(epoch)
         np.savetxt(iter_path, (epoch+1, 0), delimiter=',', fmt='%d')
 
     ### linearly decay learning rate after certain iterations
     if epoch > opt.niter:
-        model.module.update_learning_rate()
+        model.update_learning_rate()
 writter.close()
