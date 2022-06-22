@@ -1,0 +1,12 @@
+imageio
+dominate
+torch
+torchvision
+torchaudio
+ltfatpy
+librosa 
+tensorboard
+scipy==1.5.4   
+numpy==1.19.5 
+matplotlib==3.0.3
+kiwisolver
