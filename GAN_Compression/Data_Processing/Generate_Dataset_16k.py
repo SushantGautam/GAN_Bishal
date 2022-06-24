@@ -12,10 +12,10 @@ anStftWrapper = LTFATStft()
 sampling_fre = 16000
 imagesize = 128
 trunk_step = 16
-data_root = "./data/TEST/"
+data_root = "./data/TRAIN/"
 bit_num = 16
 count = 0
-phase = "test"
+phase = "train"
 n_mels=128
 outroot = "./timit_mel_{}k_{}_{}bit".format(sampling_fre//1000,phase,bit_num)
 mel_matrix = librosa.filters.mel(sr=sampling_fre,n_fft=fft_window_length,n_mels=n_mels)

@@ -9,3 +9,5 @@ dataset/timit_16k_mel/test_B
 __pycache__
 dataset/
 *.zip
+venv
+timit*
