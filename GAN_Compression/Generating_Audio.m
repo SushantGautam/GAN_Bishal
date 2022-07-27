@@ -1,5 +1,6 @@
 clear all
 clc
+addpath("C:\Program Files\MATLAB\R2018a\toolbox\phaseret", "C:\Program Files\MATLAB\R2018a\toolbox\ltfat")
 ltfatstart();
 phaseretstart;
 disp("setting up is done.");
